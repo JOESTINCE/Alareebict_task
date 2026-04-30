@@ -5,15 +5,13 @@
     <textarea matInput 
       [formControl]="control" 
       [placeholder]="placeholder || ''" 
-      [rows]="rows || 4"
-      [maxlength]="maxlength || 5000">
+      [rows]="rows || 4">
     </textarea>
   } @else {
     <input matInput 
       [type]="type || 'text'" 
       [formControl]="control" 
-      [placeholder]="placeholder || ''"
-      [maxlength]="maxlength || 500">
+      [placeholder]="placeholder || ''">
   }
 
   @if (maxlength) {

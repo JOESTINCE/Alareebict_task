@@ -45,7 +45,10 @@ export class TaskDetailsComponent implements OnInit {
     if (id) {
       this.task = this.taskService.getTaskById(id);
       if (this.task) {
-        this.taskService.getActivityLogs(id).subscribe(logs => this.history = logs);
+        this.taskService.getActivityLogs(id).subscribe({
+          next: (logs) => this.history = logs,
+          error: (err) => console.error('Failed to load activity logs:', err)
+        });
       } else {
         this.router.navigate(['/tasks']);
       }

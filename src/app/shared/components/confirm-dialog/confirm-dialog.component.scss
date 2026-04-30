@@ -1,4 +1,72 @@
-mat-dialog-content {
-  min-width: 300px;
-  padding: 20px 0;
+.dialog-title {
+  margin: 0;
+  padding: 24px 24px 16px;
+  font-weight: 800;
+  font-size: 20px;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #f1f5f9;
+
+  .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e0e7ff;
+    color: #6366f1;
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.dialog-content {
+  min-width: 350px;
+  padding: 24px !important;
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+.dialog-actions {
+  margin: 0;
+  padding: 16px 24px;
+  border-top: 1px solid #f1f5f9;
+  background-color: #f8fafc;
+  
+  .cancel-btn {
+    border-radius: 8px;
+    padding: 0 20px;
+    font-weight: 600;
+    color: #64748b;
+    
+    &:hover {
+      background-color: #e2e8f0;
+    }
+  }
+
+  .confirm-btn {
+    border-radius: 8px;
+    padding: 0 24px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    color: white;
+    margin-left: 12px !important;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
 }

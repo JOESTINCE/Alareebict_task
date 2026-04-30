@@ -1,0 +1,21 @@
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: white !important;
+  color: #1e293b !important;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.logo {
+  font-weight: 850;
+  font-size: 20px;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left: 8px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

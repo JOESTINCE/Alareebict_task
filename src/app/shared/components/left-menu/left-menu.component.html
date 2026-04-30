@@ -1,0 +1,19 @@
+<mat-nav-list>
+  <div class="nav-header">
+    <div class="user-avatar">J</div>
+    <div class="user-info">
+      <p class="user-name">Jestus A</p>
+      <a href="https://jestus.in" target="_blank" class="user-email">https://jestus.in</a>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <a mat-list-item routerLink="/tasks" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+    <mat-icon matListItemIcon>task</mat-icon>
+    <span matListItemTitle>Task Dashboard</span>
+  </a>
+
+  <a mat-list-item routerLink="/tasks/new" routerLinkActive="active-link">
+    <mat-icon matListItemIcon>add_task</mat-icon>
+    <span matListItemTitle>Create Task</span>
+  </a>

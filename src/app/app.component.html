@@ -1,65 +1,9 @@
-<mat-toolbar color="primary" class="app-toolbar mat-elevation-z4">
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span class="logo">Alareebict Task</span>
-  <span class="spacer"></span>
-  <button mat-icon-button matTooltip="Notifications">
-    <mat-icon>notifications</mat-icon>
-  </button>
-  <button mat-icon-button [matMenuTriggerFor]="profileMenu">
-    <mat-icon>account_circle</mat-icon>
-  </button>
-  <mat-menu #profileMenu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>person</mat-icon>
-      <span>Profile</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>logout</mat-icon>
-      <span>Logout</span>
-    </button>
-  </mat-menu>
-</mat-toolbar>
+<app-top-toolbar (toggleSidenav)="sidenav.toggle()"></app-top-toolbar>
 
 <mat-sidenav-container class="app-container">
-  <mat-sidenav #sidenav 
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" 
-    [opened]="!(isHandset$ | async)" 
+  <mat-sidenav #sidenav [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)"
     class="app-sidenav">
-    <mat-nav-list>
-      <div class="nav-header">
-        <div class="user-avatar">A</div>
-        <div class="user-info">
-          <p class="user-name">Admin User</p>
-          <p class="user-email">admin&#64;taskflow.io</p>
-        </div>
-      </div>
-      <mat-divider></mat-divider>
-
-      <a mat-list-item routerLink="/tasks" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
-        <mat-icon matListItemIcon>task</mat-icon>
-        <span matListItemTitle>Task Dashboard</span>
-      </a>
-
-      <a mat-list-item routerLink="/tasks/new" routerLinkActive="active-link">
-        <mat-icon matListItemIcon>add_task</mat-icon>
-        <span matListItemTitle>Create Task</span>
-      </a>
-
-      <mat-divider></mat-divider>
-      <div class="nav-label">General</div>
-
-      <a mat-list-item routerLinkActive="active-link">
-        <mat-icon matListItemIcon>analytics</mat-icon>
-        <span matListItemTitle>Analytics</span>
-      </a>
-
-      <a mat-list-item routerLinkActive="active-link">
-        <mat-icon matListItemIcon>settings</mat-icon>
-        <span matListItemTitle>Settings</span>
-      </a>
-    </mat-nav-list>
+    <app-left-menu></app-left-menu>
   </mat-sidenav>
 
   <mat-sidenav-content class="app-content">

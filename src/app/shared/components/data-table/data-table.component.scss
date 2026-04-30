@@ -33,7 +33,23 @@ th.mat-mdc-header-cell {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 16px 20px !important; /* Slightly reduced padding */
+  padding: 16px 20px !important;
+  text-align: center;
+
+  ::ng-deep .mat-sort-header-container {
+    justify-content: center;
+  }
+
+  ::ng-deep .mat-sort-header-arrow {
+    opacity: 0.5 !important;
+    transform: none !important;
+  }
+
+  &[aria-sort="ascending"], &[aria-sort="descending"] {
+    ::ng-deep .mat-sort-header-arrow {
+      opacity: 1 !important;
+    }
+  }
 }
 
 td.mat-mdc-cell {
@@ -130,9 +146,9 @@ tr.mat-mdc-row:hover {
 }
 
 .card-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Center label and badge vertically */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
   padding: 10px 0;
   border-bottom: 1px dashed #f1f5f9;
   font-size: 13px;
@@ -144,15 +160,13 @@ tr.mat-mdc-row:hover {
   .label {
     color: #64748b;
     font-weight: 600;
-    flex-shrink: 0;
-    margin-right: 12px;
   }
   
   .value {
     color: #334155;
-    text-align: right;
+    text-align: center;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     overflow: hidden;
     text-overflow: ellipsis;

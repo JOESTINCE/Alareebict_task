@@ -114,6 +114,35 @@ h1 {
 
 @media (max-width: 850px) {
   .grid-layout {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+  .main-info {
+    display: contents;
+  }
+  .info-card {
+    order: 1;
+  }
+  .sidebar {
+    order: 2;
+  }
+  .history-card {
+    order: 3;
+  }
+}
+
+@media (max-width: 600px) {
+  .details-container {
+    padding: 16px;
+  }
+  
+  .meta-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  .description {
+    font-size: 15px;
+    margin-bottom: 24px;
   }
 }

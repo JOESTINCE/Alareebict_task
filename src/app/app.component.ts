@@ -1,36 +1,24 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive, NavigationEnd, Router } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { RouterOutlet, NavigationEnd, Router } from '@angular/router';
 import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDividerModule } from '@angular/material/divider';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { filter, map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { TopToolbarComponent } from './shared/components/top-toolbar/top-toolbar.component';
+import { LeftMenuComponent } from './shared/components/left-menu/left-menu.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet, 
-    RouterLink, 
-    RouterLinkActive,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
+    CommonModule,
+    RouterOutlet,
     MatSidenavModule,
-    MatListModule,
-    MatMenuModule,
-    MatTooltipModule,
-    MatDividerModule,
-    LoaderComponent
+    LoaderComponent,
+    TopToolbarComponent,
+    LeftMenuComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -41,7 +29,7 @@ export class AppComponent implements OnInit {
   private breakpointObserver = inject(BreakpointObserver);
   private router = inject(Router);
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(['(max-width: 1024px)'])
     .pipe(
       map(result => result.matches),
       shareReplay()
@@ -51,12 +39,18 @@ export class AppComponent implements OnInit {
     // Automatically close sidenav on navigation in mobile mode
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.isHandset$.subscribe(isHandset => {
-        if (isHandset && this.sidenav) {
-          this.sidenav.close();
-        }
-      });
+    ).subscribe({
+      next: () => {
+        this.isHandset$.subscribe({
+          next: (isHandset) => {
+            if (isHandset && this.sidenav) {
+              this.sidenav.close();
+            }
+          },
+          error: (err) => console.error('Error in handset observer:', err)
+        });
+      },
+      error: (err) => console.error('Router events error:', err)
     });
   }
 }

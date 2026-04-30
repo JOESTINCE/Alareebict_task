@@ -61,7 +61,7 @@
   } @else {
     <!-- Mobile Card View -->
     <div class="mobile-card-list">
-      @for (element of dataSource.data; track element) {
+      @for (element of dataSource.connect() | async; track element) {
         <mat-card class="mobile-card">
           <mat-card-header>
             <mat-card-title>{{ getValue(element, 'title') }}</mat-card-title>

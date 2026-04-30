@@ -67,9 +67,15 @@ export class TaskListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(tasks => {
-      this.allTasks = tasks;
-      this.applyFilters();
+    this.taskService.getTasks().subscribe({
+      next: (tasks) => {
+        this.allTasks = tasks;
+        this.applyFilters();
+      },
+      error: (err) => {
+        console.error('Failed to load tasks:', err);
+        this.notification.error('Failed to load tasks. Please try again later.');
+      }
     });
   }
 
