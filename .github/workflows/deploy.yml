@@ -8,8 +8,6 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: Checkout code
@@ -24,8 +22,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Angular App
-        run: npm run build -- --base-href /Alareebict_task/
+      - name: Clean and Build Angular App
+        run: |
+          rm -rf dist
+          npm run build -- --base-href /
+
+      - name: Add CNAME for custom domain
+        run: echo "task.alareebict.jestus.in" > dist/task/browser/CNAME
 
       - name: Copy index.html to 404.html
         run: cp dist/task/browser/index.html dist/task/browser/404.html
@@ -34,4 +37,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/task/browser 
+          publish_dir: ./dist/task/browser
+          publish_branch: gh-pages
