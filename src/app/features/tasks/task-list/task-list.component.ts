@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,6 +43,7 @@ import { PageHeaderComponent } from '../../../shared/components/page-header/page
 })
 export class TaskListComponent implements OnInit {
   @ViewChild('taskTable') taskTable!: DataTableComponent<Task>;
+  private destroyRef = inject(DestroyRef);
 
   allTasks: Task[] = [];
   filteredTasks: Task[] = [];
@@ -67,7 +69,9 @@ export class TaskListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe({
+    this.taskService.getTasks().pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
       next: (tasks) => {
         this.allTasks = tasks;
         this.applyFilters();

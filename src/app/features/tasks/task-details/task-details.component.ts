@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,6 +34,7 @@ import { PageHeaderComponent } from '../../../shared/components/page-header/page
 export class TaskDetailsComponent implements OnInit {
   task: Task | undefined;
   history: ActivityLog[] = [];
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +47,9 @@ export class TaskDetailsComponent implements OnInit {
     if (id) {
       this.task = this.taskService.getTaskById(id);
       if (this.task) {
-        this.taskService.getActivityLogs(id).subscribe({
+        this.taskService.getActivityLogs(id).pipe(
+          takeUntilDestroyed(this.destroyRef)
+        ).subscribe({
           next: (logs) => this.history = logs,
           error: (err) => console.error('Failed to load activity logs:', err)
         });
