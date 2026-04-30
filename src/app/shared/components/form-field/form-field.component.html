@@ -1,0 +1,33 @@
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>{{ label }}</mat-label>
+  
+  @if (type === 'textarea') {
+    <textarea matInput 
+      [formControl]="control" 
+      [placeholder]="placeholder || ''" 
+      [rows]="rows || 4"
+      [maxlength]="maxlength || 5000">
+    </textarea>
+  } @else {
+    <input matInput 
+      [type]="type || 'text'" 
+      [formControl]="control" 
+      [placeholder]="placeholder || ''"
+      [maxlength]="maxlength || 500">
+  }
+
+  @if (maxlength) {
+    <mat-hint align="end" [class.error-hint]="control.hasError('maxlength')">
+      {{ control.value?.length || 0 }}/{{ maxlength }}
+    </mat-hint>
+  }
+
+  @if (control.invalid && control.touched) {
+    <mat-error>
+      @if (control.hasError('required')) { {{ label }} is required }
+      @else if (control.hasError('maxlength')) { Maximum length is {{ maxlength }} }
+      @else if (control.hasError('pattern')) { Invalid format }
+      @else { {{ errorMessage || 'Invalid input' }} }
+    </mat-error>
+  }
+</mat-form-field>

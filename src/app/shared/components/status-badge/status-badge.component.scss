@@ -1,0 +1,23 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap; /* Prevent wrapping */
+  min-width: 100px;
+}
+
+/* Status Colors */
+.pending { background-color: #fef3c7; color: #92400e; }
+.in-progress { background-color: #e0e7ff; color: #3730a3; }
+.completed { background-color: #d1fae5; color: #065f46; }
+
+/* Priority Colors */
+.high { background-color: #fee2e2; color: #991b1b; }
+.medium { background-color: #ffedd5; color: #9a3412; }
+.low { background-color: #f1f5f9; color: #475569; }

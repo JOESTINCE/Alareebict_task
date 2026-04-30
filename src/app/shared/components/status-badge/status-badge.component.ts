@@ -1,0 +1,18 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-status-badge',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './status-badge.component.html',
+  styleUrl: './status-badge.component.scss'
+})
+export class StatusBadgeComponent {
+  @Input() label: string = '';
+  @Input() type: 'status' | 'priority' = 'status';
+
+  get typeClass(): string {
+    return this.label.toLowerCase().replace(/\s/g, '-');
+  }
+}

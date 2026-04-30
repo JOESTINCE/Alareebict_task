@@ -1,0 +1,86 @@
+@if (task) {
+  <div class="details-container">
+    <app-page-header 
+      [title]="task.title" 
+      [subtitle]="'ID: ' + task.id"
+      [showBackButton]="true"
+      buttonLabel="Edit Task"
+      buttonIcon="edit"
+      buttonColor="primary"
+      (actionClick)="edit()"
+      (backClick)="back()">
+    </app-page-header>
+
+    <div class="grid-layout">
+      <div class="main-info">
+        <mat-card class="info-card">
+          <mat-card-header>
+            <mat-card-title>Description</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="description">{{ task.description }}</p>
+            
+            <div class="meta-grid">
+              <div class="meta-item">
+                <label>Start Date</label>
+                <p>{{ task.startDate | date:'longDate' }}</p>
+              </div>
+              <div class="meta-item">
+                <label>Due Date</label>
+                <p>{{ task.dueDate | date:'longDate' }}</p>
+              </div>
+              <div class="meta-item">
+                <label>Created At</label>
+                <p>{{ task.createdAt | date:'medium' }}</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="history-card">
+          <mat-card-header>
+            <mat-card-title>Activity History</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list>
+              @for (log of history; track log.timestamp) {
+                <mat-list-item>
+                  <mat-icon matListItemIcon>history</mat-icon>
+                  <div matListItemTitle>{{ log.message }}</div>
+                  <div matListItemLine>{{ log.user }} • {{ log.timestamp | date:'short' }}</div>
+                </mat-list-item>
+              }
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="sidebar">
+        <mat-card class="status-card">
+          <mat-card-content>
+            <div class="status-section">
+              <label>Status</label>
+              <app-status-badge [label]="task.status" type="status"></app-status-badge>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="status-section">
+              <label>Priority</label>
+              <app-status-badge [label]="task.priority" type="priority"></app-status-badge>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="status-section">
+              <label>Assignee</label>
+              <div class="user-info">
+                <div class="user-avatar">{{ task.assignedTo[0] }}</div>
+                <div class="user-details">
+                  <p class="user-name">{{ task.assignedTo }}</p>
+                  <p class="user-role">Employee</p>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+}

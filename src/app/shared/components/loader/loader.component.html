@@ -1,0 +1,10 @@
+@if (loaderService.loading$ | async) {
+  <div class="loader-overlay">
+    <mat-progress-spinner 
+      mode="indeterminate" 
+      color="primary"
+      diameter="60">
+    </mat-progress-spinner>
+    <p>Loading, please wait...</p>
+  </div>
+}

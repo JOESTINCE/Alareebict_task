@@ -1,0 +1,167 @@
+.table-container {
+  border-radius: 16px;
+  overflow-x: auto; /* Enable horizontal scroll */
+  background: white;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  
+  /* Custom Scrollbar for better UX */
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+    &:hover {
+      background: #94a3b8;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th.mat-mdc-header-cell {
+  background-color: #f8fafc;
+  color: #64748b;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px 20px !important; /* Slightly reduced padding */
+}
+
+td.mat-mdc-cell {
+  padding: 12px 20px !important; /* Slightly reduced padding */
+  color: #334155;
+  font-size: 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.mat-column-actions {
+  width: 100px;
+  text-align: center;
+  background: inherit;
+  
+  .action-container {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+}
+
+tr.mat-mdc-row:hover {
+  background-color: #f8fafc;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  th.mat-mdc-header-cell, td.mat-mdc-cell {
+    padding: 14px 16px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  table {
+    min-width: 700px;
+  }
+  
+  th.mat-mdc-header-cell, td.mat-mdc-cell {
+    padding: 12px 12px !important;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-container {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+/* Mobile Card View Styles */
+.mobile-card-list {
+  padding: 12px;
+  background-color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-card {
+  border-radius: 12px !important;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+  margin-bottom: 4px;
+  
+  mat-card-header {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center title and menu vertically */
+    border-bottom: 1px solid #f1f5f9;
+    
+    ::ng-deep .mat-mdc-card-header-text {
+      margin: 0;
+    }
+    
+    mat-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+      line-height: 1.2;
+    }
+    
+    button {
+      margin: -8px -8px -8px 0;
+    }
+  }
+  
+  mat-card-content {
+    padding: 8px 16px 16px;
+  }
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Center label and badge vertically */
+  padding: 10px 0;
+  border-bottom: 1px dashed #f1f5f9;
+  font-size: 13px;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  .label {
+    color: #64748b;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+  
+  .value {
+    color: #334155;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.no-data {
+  padding: 40px;
+  text-align: center;
+  color: #64748b;
+  font-weight: 600;
+}

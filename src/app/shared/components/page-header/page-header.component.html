@@ -1,0 +1,27 @@
+<header class="page-header">
+  <div class="header-left">
+    @if (showBackButton) {
+      <button mat-icon-button (click)="backClick.emit()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    }
+    <div class="title-group">
+      <h1>{{ title }}</h1>
+      @if (subtitle) {
+        <p>{{ subtitle }}</p>
+      }
+    </div>
+  </div>
+
+  <div class="header-right">
+    @if (buttonLabel) {
+      <button mat-raised-button [color]="buttonColor || 'primary'" (click)="actionClick.emit()">
+        @if (buttonIcon) {
+          <mat-icon>{{ buttonIcon }}</mat-icon>
+        }
+        {{ buttonLabel }}
+      </button>
+    }
+    <ng-content select="[extraActions]"></ng-content>
+  </div>
+</header>
